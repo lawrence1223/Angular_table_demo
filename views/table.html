@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+  <meta charset="utf-8">
+  <title>Lawrence's demo</title>
+	<link rel="stylesheet" type="text/css" href="../libs/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../styles/table.css">
+</head>
+<body>
+	<div class="cp-body-content clearfix" ng-controller="MyCtrl">
+	
+		<div id="page_title">UX Society Members:</div> 
+		<input class="search" ng-model="query" type="text" size="1000" placeholder="Search here">
+		
+		
+		<div class="total-match">Total matches: <b>{{( apps | appNameSearch: query | appCategoryFilter: filterProp ).length }}</b></div>
+		
+		<table class="cp-table table" style="float: left;">
+			<tbody>
+			<tr> 
+				<td>Name</td>
+				<td>Occupation</td>
+				<td>Company</td>
+			</tr>
+				
+			<tr class="clickableRow" ng-repeat="app in apps | appNameSearch: query | appCategoryFilter: filterProp | orderBy: orderProp" ng-click="showDetailedInfo(app)">
+					
+					<td class="cp-table-title">
+							<strong>
+								
+									{{app.firstName}}&nbsp;{{app.middleInitial}}&nbsp;{{app.surname}}
+							</strong>
+							
+					</td>
+					
+					<td class="cp-table-meta">{{app.occupation}}</td>
+					<td class="cp-table-meta">{{app.company}}</td>
+					<td hidden id="row_id">{{app.id}}</td>
+					
+					
+			</tr>
+			
+			</tbody>
+    </table>
+    <div style="float: left; width: 35%; padding-left: 20px;margin-left:20px;">
+		
+		<h2>{{detailedPersonInfo.firstName}}&nbsp;{{detailedPersonInfo.middleInitial}}&nbsp;{{detailedPersonInfo.surname}}</h2>
+		<img src={{detailedPersonInfo.portrait}} > 
+		<div class="detail_info">{{detailedPersonInfo.occupation}}</div>
+		<div class="detail_info">{{detailedPersonInfo.company}}</div>
+		<div class="detail_info moto_detail">{{detailedPersonInfo.motto}}</div>
+	
+		
+    </div>
+    <div>
+    	<img src="{{app.portrait}}">
+
+    </div>
+
+	</div>
+						
+	<script type="text/javascript" src="../libs/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../libs/angular.min.js"></script>
+	<script type="text/javascript" src="../libs/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../scripts/table.js"></script>
+	<script type="text/javascript" src="../scripts/service.js"></script> 
+	<script type="text/javascript" src="../scripts/filter.js"></script> 
+	<script type="text/javascript" src="../scripts/directive.js"></script> 
+</body>
+<!--
+<script type="text/javascript">
+$(document).ready(function() {
+      $(".clickableRow").click(function(e) {
+      		e.preventDefault();
+            var emp_id = $(this).find('#row_id').html();
+            alert(emp_id);
+      });
+});
+</script>-->
+</html>
